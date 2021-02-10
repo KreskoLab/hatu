@@ -1,0 +1,23 @@
+{
+  "name": "hatu",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@mdi/font": "^5.9.55",
+    "@nuxtjs/axios": "^5.13.0",
+    "buefy": "^0.9.4",
+    "bulma": "^0.9.2",
+    "core-js": "^3.8.3",
+    "node-sass": "^5.0.0",
+    "nuxt": "^2.14.12",
+    "regenerator-runtime": "^0.13.7",
+    "sass-loader": "^10.1.1"
+  },
+  "devDependencies": {}
+}
