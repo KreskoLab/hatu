@@ -1,8 +1,8 @@
 <template>
     <div class="card">
       <div class="card-image">
-        <figure class="image is-5by4">
-          <img :src="item.img_620x460">
+        <figure class="image is-5by4 pt-0">
+          <nuxt-picture :src="item.img_620x460" placeholder />
         </figure>
       </div>
       <div class="card-content pl-4 pb-0" style="margin-top:-10px">

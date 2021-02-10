@@ -1,5 +1,5 @@
 <template>
-    <b-navbar transparent mobile-burger="false" class="mx-4 mt-2">
+    <b-navbar transparent :mobile-burger="false" class="mx-4 mt-2">
 
         <template #brand>
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
