@@ -12,7 +12,7 @@
             <p class="title is-5 is-text-overflow mb-0">{{item.name}}</p>
 
             <span class="subtitle is-size-6 icon-text has-text-grey-dark mt-2 mb-0" style="font-size:11.5pt!important">
-              <b-icon icon="star-shooting" />
+              <b-icon icon="star" />
               <span class="mt-1">{{item.buildClassText}}</span>
               <b-icon icon="ruler" />
               <span class="mt-1">{{item.areaMin}}+ м²</span>
@@ -47,14 +47,10 @@ export default {
 }
 
 .is-text-overflow {
-    width: 270px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.card:hover{
-  margin:2px
+  max-width: 270px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 </style>
