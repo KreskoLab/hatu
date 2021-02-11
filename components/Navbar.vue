@@ -1,5 +1,5 @@
 <template>
-    <b-navbar transparent :mobile-burger="false" class="mx-4 mt-2">
+    <b-navbar :mobile-burger="false" class="mx-4 mt-2">
 
         <template #brand>
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
@@ -11,13 +11,18 @@
 
         <template #start>
 
-            <b-navbar-dropdown boxed label="Київ">
-              
-                <b-navbar-item aria-role="listitem">Київ</b-navbar-item>
-                <b-navbar-item aria-role="listitem">Львів</b-navbar-item>
-                <b-navbar-item aria-role="listitem">Одеса</b-navbar-item>
-              
-            </b-navbar-dropdown>
+            <b-dropdown class="is-hidden-mobile" v-model="selectedCity" aria-role="list"> 
+
+                <div class="navbar-item is-clickable" slot="trigger" role="button">
+                    <b-icon icon="map-marker"></b-icon>
+                    <span class="is-unselectable">{{selectedCity.name}}</span>
+                </div>
+
+                <b-dropdown-item :focusable="false" :value="city" v-for="(city,i) in cities" :key="city.i">
+                    {{city.name}}
+                </b-dropdown-item>
+
+            </b-dropdown>
 
             <b-navbar-dropdown boxed label="Кімнат">
 
@@ -47,10 +52,26 @@
 
 <script>
 export default {
-  
+    data(){
+        return{
+            cities: [
+                {name: 'Київ', code: 'kvartiry-kiev'},
+                {name: 'Львів', code: 'lvov'},
+                {name: 'Одеса', code: 'odessa'}
+            ],
+            selectedCity: this.$store.getters.getCity
+        }
+    },
+    watch: {
+        selectedCity(val){
+           this.$store.commit('updateCity', val)
+         }
+    }
 }
 </script>
 
 <style>
-
+.dropdown-content{font-size:.875rem;padding-bottom:.5rem;padding-top:.5rem;border:1px solid #dbdbdb;border-radius:6px}
+.dropdown-menu{min-width:110px!important;transition-duration:86ms;transition-property: opacity, transform}
+.dropdown-item{padding:.375rem 1rem;padding-right:3rem;white-space:nowrap}
 </style>
