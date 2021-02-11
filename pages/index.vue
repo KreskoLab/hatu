@@ -18,7 +18,9 @@
 
 export default {
   async fetch(){
-    await this.$axios.$get(`domria/novostroyki/${this.city.code}/noRender/`)
+    //await this.$axios.$get(`domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}`)
+    await this.$axios.
+    $get(this.$route.query.page == 1 ? `domria/${this.city.code}/noRender/` : `domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}`)
     .then((res) => {
       this.buildings = res.banners
       this.total = res.count
@@ -37,6 +39,9 @@ export default {
   },
   watch: {
     city(){
+      this.$fetch()
+    },
+    $route(to, from) {
       this.$fetch()
     }
   }
