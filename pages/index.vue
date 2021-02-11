@@ -1,9 +1,17 @@
 <template>
   <div>
 
-    <div class="columns is-multiline is-mobile m-4">
+    <div class="columns is-multiline is-mobile m-4 is-hidden-mobile">
 
         <div class="column is-3" v-for="(building,i) in buildings" :key="building.i">
+            <Card :item="building" />
+        </div>
+
+    </div>
+
+    <div class="columns is-multiline m-4 is-hidden-tablet">
+
+        <div class="column" v-for="(building,i) in buildings" :key="building.i">
             <Card :item="building" />
         </div>
 
