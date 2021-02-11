@@ -43,7 +43,7 @@ export default {
   },
   
   proxy: {   
-    '/domria/': { target: 'https://dom.ria.com/uk/', pathRewrite: {'^/domria/': ''}, changeOrigin: true },
+    '/domria/': { target: 'https://dom.ria.com/uk/novostroyki/', pathRewrite: {'^/domria/': ''}, changeOrigin: true },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
