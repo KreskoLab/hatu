@@ -34,8 +34,17 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxt/image',
+    '@nuxtjs/proxy',
     'cookie-universal-nuxt'
   ],
+
+  axios: {
+    proxy: true
+  },
+  
+  proxy: {   
+    '/domria/': { target: 'https://dom.ria.com/uk/', pathRewrite: {'^/domria/': ''}, changeOrigin: true },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
