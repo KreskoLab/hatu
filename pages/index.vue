@@ -15,9 +15,10 @@
 </template>
 
 <script>
+
 export default {
   async fetch(){
-    await this.$axios.$get(`https://dom.ria.com/uk/novostroyki/${this.city.code}/noRender/`)
+    await this.$axios.$get(`domria/novostroyki/${this.city.code}/noRender/`)
     .then((res) => {
       this.buildings = res.banners
       this.total = res.count
