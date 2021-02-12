@@ -13,11 +13,13 @@
   }
 
   export const actions = {
-    nuxtServerInit ({ state }) {
+    check ({ commit, state }) {
       if( !this.$cookies.get('city') ){
-        this.$cookies.set('city', state.city)
+        commit('updateCity', state.city)
       }
-      state.city = this.$cookies.get('city')
+      else{
+        commit('updateCity', this.$cookies.get('city'))
+      }
     }
   }
 
