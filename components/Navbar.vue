@@ -2,7 +2,7 @@
     <b-navbar :mobile-burger="false" class="mx-4 mt-2">
 
         <template #brand>
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
                 <img
                     src="https://www.trulia.com/images/icons/favicon-rebrand-196.png"
                 >
@@ -61,6 +61,9 @@ export default {
             ],
             selectedCity: this.$store.getters.getCity
         }
+    },
+    created(){
+        this.$store.dispatch('check')
     },
     watch: {
         selectedCity(val){
