@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!$fetchState.pending">
 
     <div class="columns is-multiline is-mobile m-4 is-hidden-mobile">
 
@@ -26,7 +26,6 @@
 
 export default {
   async fetch(){
-    //await this.$axios.$get(`domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}`)
     await this.$axios.
     $get(this.$route.query.page == 1 ? `domria/${this.city.code}/noRender/` : `domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}`)
     .then((res) => {
