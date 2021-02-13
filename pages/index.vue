@@ -39,7 +39,14 @@ export default {
       `domria/${this.city.code}/noRender/?sortType=${this.sort}` : 
       `domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}&sortType=${this.sort}`)
     .then((res) => {
-      this.buildings = res.banners
+      this.buildings = res.banners.map( item => ({
+        name: item.name,
+        img: item.img_620x460,
+        logoCircle: item.logoCircle,
+        priceUSD: item.priceUSD,
+        buildClassText: item.buildClassText,
+        areaMin: item.areaMin 
+      }))
       this.total = res.count
     })
   },
