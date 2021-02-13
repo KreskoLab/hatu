@@ -1,24 +1,32 @@
 <template>
-  <div v-if="!$fetchState.pending">
+  <div>
 
-    <div class="columns is-multiline is-mobile m-4 is-hidden-mobile">
-
-        <div class="column is-3" v-for="(building,i) in buildings" :key="building.i">
-            <Card :item="building" />
-        </div>
-
+    <div v-if="$fetchState.pending">
+      <b-loading :is-full-page="false" :active="true"></b-loading>
     </div>
 
-    <div class="columns is-multiline m-4 is-hidden-tablet">
+    <div v-else>
 
-        <div class="column" v-for="(building,i) in buildings" :key="building.i">
-            <Card :item="building" />
-        </div>
+      <div class="columns is-multiline is-mobile m-4 is-hidden-mobile">
 
+          <div class="column is-3" v-for="(building,i) in buildings" :key="building.i">
+              <Card :item="building" />
+          </div>
+
+      </div>
+
+      <div class="columns is-multiline m-4 is-hidden-tablet">
+
+          <div class="column" v-for="(building,i) in buildings" :key="building.i">
+              <Card :item="building" />
+          </div>
+
+      </div>
+
+      <Pagination :count="total" class="mx-5 mb-2" />
+      
     </div>
 
-    <Pagination :count="total" class="mx-5 mb-2" />
-    
   </div>
 </template>
 
@@ -27,7 +35,9 @@
 export default {
   async fetch(){
     await this.$axios.
-    $get(this.$route.query.page == 1 ? `domria/${this.city.code}/noRender/` : `domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}`)
+      $get(this.$route.query.page == 1 ? 
+      `domria/${this.city.code}/noRender/?sortType=${this.sort}` : 
+      `domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}&sortType=${this.sort}`)
     .then((res) => {
       this.buildings = res.banners
       this.total = res.count
@@ -42,10 +52,16 @@ export default {
   computed: {
     city(){
       return this.$store.getters.getCity
+    },
+    sort(){
+      return this.$store.getters.getSort
     }
   },
   watch: {
     city(){
+      this.$router.push({ path: this.$router.currentPath, query: {page: 1} })
+    },
+    sort(){
       this.$fetch()
     },
     $route(to, from) {
