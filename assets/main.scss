@@ -12,16 +12,12 @@ $body-background-color: #EBF1F2;
 //Text
 $text: #363636;
 
-//Navbar
-$navbar-background-color: $body-background-color;
-
-//Button
-//$button-background-color: transparent;
-//$button-border-color: $text;
-//$button-border-width: 2px;
+//Pagination
+$pagination-border-color: $text;
 
 //Dropdown
 $dropdown-background-color: transparent;
+$dropdown-menu-min-width: 120px;
 
 //Card
 $card-radius: 0.45rem;
@@ -33,6 +29,11 @@ $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
+
+//Navbar
+$navbar-background-color: $body-background-color;
+$navbar-item-hover-background-color: $body-background-color;
+$navbar-item-active-color: $primary;
 
 // Lists and maps
 $custom-colors: null !default;
