@@ -59,7 +59,7 @@ export default {
   },
   watch: {
     city(){
-      this.$router.push({ path: this.$router.currentPath, query: {page: 1} })
+      this.$router.push('/')
     },
     sort(){
       this.$fetch()
