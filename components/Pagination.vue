@@ -1,5 +1,5 @@
 <template>
-<b-pagination v-model="page" :total="count" :per-page="24" range-before="2" range-after="2" order="is-centered">
+<b-pagination v-model="page" :total="count" :per-page="24"  order="is-centered">
 
     <b-pagination-button
         slot-scope="props"

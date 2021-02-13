@@ -2,16 +2,12 @@
     <b-navbar :mobile-burger="false" class="mx-4 mt-2">
 
         <template #brand>
+
             <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
-                <img
-                    src="https://www.trulia.com/images/icons/favicon-rebrand-196.png"
-                >
+                <img src="https://www.trulia.com/images/icons/favicon-rebrand-196.png">
             </b-navbar-item>
-        </template>
 
-        <template #start>
-
-            <b-dropdown class="is-hidden-mobile" v-model="selectedCity" aria-role="list"> 
+            <b-dropdown class="is-hidden-desktop" v-model="selectedCity" aria-role="list"> 
 
                 <div class="navbar-item is-clickable" slot="trigger" role="button">
                     <b-icon icon="map-marker"></b-icon>
@@ -24,27 +20,39 @@
 
             </b-dropdown>
 
-            <b-navbar-dropdown boxed label="Кімнат">
+            <b-navbar-item class="is-hidden-desktop" style="margin-left:auto" @click="sort = 1" :active="sort == 1">
+                <span>Дешевші</span>
+            </b-navbar-item>
+            <b-navbar-item class="is-hidden-desktop" @click="sort = 2" :active="sort == 2">
+                <span>Дорожчі</span>
+            </b-navbar-item>
 
-                <b-navbar-item class="pr-4" aria-role="listitem">
-                  <b-field>
-                      <p class="control">
-                          <b-button>1</b-button>
-                      </p>
-                      <p class="control">
-                          <b-button>2</b-button>
-                      </p>
-                      <p class="control">
-                          <b-button>3</b-button>
-                      </p>
-                      <p class="control">
-                          <b-button>4+</b-button>
-                      </p>
-                  </b-field>
-                </b-navbar-item>
+        </template>
 
-            </b-navbar-dropdown>
+        <template #start>
 
+            <b-dropdown v-model="selectedCity" aria-role="list"> 
+
+                <div class="navbar-item is-clickable" slot="trigger" role="button">
+                    <b-icon icon="map-marker"></b-icon>
+                    <span class="is-unselectable">{{selectedCity.name}}</span>
+                </div>
+
+                <b-dropdown-item :focusable="false" :value="city" v-for="(city,i) in cities" :key="city.i">
+                    {{city.name}}
+                </b-dropdown-item>
+
+            </b-dropdown>
+
+        </template>
+
+        <template #end>
+            <b-navbar-item @click="sort = 1" :active="sort == 1">
+                <span>Дешевші</span>
+            </b-navbar-item>
+            <b-navbar-item @click="sort = 2" :active="sort == 2">
+                <span>Дорожчі</span>
+            </b-navbar-item>
         </template>
 
     </b-navbar>
@@ -59,6 +67,7 @@ export default {
                 {name: 'Львів', code: 'lvov'},
                 {name: 'Одеса', code: 'odessa'}
             ],
+            sort: this.$store.getters.getSort,
             selectedCity: this.$store.getters.getCity
         }
     },
@@ -68,7 +77,10 @@ export default {
     watch: {
         selectedCity(val){
            this.$store.commit('updateCity', val)
-         }
+        },
+        sort(val){
+            this.$store.commit('updateSort', val)
+        }
     }
 }
 </script>
