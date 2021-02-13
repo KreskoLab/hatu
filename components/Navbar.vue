@@ -21,10 +21,11 @@
             </b-dropdown>
 
             <b-navbar-item class="is-hidden-desktop" style="margin-left:auto" @click="sort = 1" :active="sort == 1">
-                <span>Дешевші</span>
+                <span>$ ^-</span>
             </b-navbar-item>
+
             <b-navbar-item class="is-hidden-desktop" @click="sort = 2" :active="sort == 2">
-                <span>Дорожчі</span>
+                <span>$ -^</span>
             </b-navbar-item>
 
         </template>
