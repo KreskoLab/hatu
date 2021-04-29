@@ -1,83 +1,48 @@
 <template>
-  <div>
-
-    <div v-if="$fetchState.pending">
-      <b-loading :is-full-page="false" :active="true"></b-loading>
-    </div>
-
-    <div v-else>
-
-      <div class="columns is-multiline is-mobile m-4 is-hidden-mobile">
-
-          <div class="column is-3" v-for="(building,i) in buildings" :key="building.i">
-              <Card :item="building" />
-          </div>
-
-      </div>
-
-      <div class="columns is-multiline m-4 is-hidden-tablet">
-
-          <div class="column" v-for="(building,i) in buildings" :key="building.i">
-              <Card :item="building" />
-          </div>
-
-      </div>
-
-      <Pagination :count="total" class="mx-5 mb-2" />
-      
-    </div>
-
-  </div>
+  <v-row justify="start" align="center">
+    <v-col cols="12" sm="6" md="4" v-for="(item,i) in cities" :key="item.i">
+      <v-card nuxt :to="`/novobydovu/${item.link}`">
+        <v-img
+          :src="item.img"
+          class="white--text align-end"
+          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
+          height="200px"
+        >
+          <v-card-title>
+            <span class="">{{item.name}}</span> 
+          </v-card-title>
+          <v-card-subtitle>
+            <span class="text-subtitle-2 grey--text text--lighten-4">{{item.count}} об'єктів</span> 
+          </v-card-subtitle>
+        </v-img>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-
 export default {
-  async fetch(){
-    await this.$axios.
-      $get(this.$route.query.page == 1 ? 
-      `domria/${this.city.code}/noRender/?sortType=${this.sort}` : 
-      `domria/${this.city.code}/noRender/?page=${Number(this.$route.query.page)}&sortType=${this.sort}`)
+  async fetch() {
+    await this.$axios.$get('cities/mainPage/?langId=4&pathname=/uk/novostroyki/')
     .then((res) => {
-      this.buildings = res.banners.map( item => ({
-        name: item.name,
-        img: item.img_620x460,
-        logoCircle: item.logoCircle,
-        priceUSD: item.priceUSD,
-        buildClassText: item.buildClassText,
-        areaMin: item.areaMin 
-      }))
-      this.total = res.count
+      var temp_arr = res.catalog.seo.tabs[0].content.map(city => {
+        return {
+          name: city.name,
+          count: city.count,
+          img: '/images/' + city.href.replace('/uk/novostroyki/', '').slice(0, -1) + '.jpg',
+          link: city.href.replace('/uk/novostroyki/', '').slice(0, -1)
+        }
+      })
+      this.cities = temp_arr.sort((a,b) => b.count - a.count)
     })
   },
-  data(){
-    return{
-      buildings: [],
-      total: null
+  data() {
+    return {
+      cities: []
     }
   },
-  computed: {
-    city(){
-      return this.$store.getters.getCity
-    },
-    sort(){
-      return this.$store.getters.getSort
-    }
-  },
-  watch: {
-    city(){
-      this.$router.push('/')
-    },
-    sort(){
-      this.$fetch()
-    },
-    $route(to, from) {
-      this.$fetch()
-    }
+  head: {
+    title: 'Prikol'
   }
 }
 </script>
-
-<style>
-
-</style>

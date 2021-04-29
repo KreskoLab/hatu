@@ -1,5 +1,5 @@
 {
-  "name": "hatu",
+  "name": "ria",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,18 +9,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxt/image": "^0.3.0",
-    "@nuxtjs/axios": "^5.13.0",
+    "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/proxy": "^2.1.0",
-    "buefy": "^0.9.4",
-    "cookie-universal-nuxt": "^2.1.4",
-    "core-js": "^3.8.3",
-    "nuxt": "^2.15.0",
-    "sass": "^1.30.0",
-    "sass-loader": "^10.1.0"
+    "core-js": "^3.9.1",
+    "nuxt": "^2.15.3"
   },
-  "resolutions": {
-    "nuxt/@nuxt/components": "2.0.0"
-  },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.3"
+  }
 }
